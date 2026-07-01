@@ -1,14 +1,21 @@
 package Service;
 
-import DAO.accountDao;
+import java.sql.Connection;
+
+import DAO.accountDAO;
+import Model.Account;
+import Util.ConnectionUtil;
 
 public class accountService {
+  
   public accountDAO accountDao;
   
   public accountService(){
-    
+    accountDao = new accountDAO();
   }
-  public void addAccount(accountDAO.account){
+
+  
+  public void login(){
 
   }
 }
