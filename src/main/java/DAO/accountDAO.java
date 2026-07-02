@@ -23,14 +23,13 @@ public class accountDAO {
           int generated_account_id = (int) rs.getLong(1);
           return new Account(generated_account_id, account.getUsername(), account.getPassword());
         }
-
-
     }catch(Exception e){
       System.out.println(e.getMessage());
     }
     return null;
 
   }
+
   public void login(String username, String password){
     Connection connection = ConnectionUtil.getConnection();
     try{

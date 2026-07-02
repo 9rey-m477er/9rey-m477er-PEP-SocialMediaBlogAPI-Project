@@ -31,13 +31,13 @@ public class SocialMediaController {
     }
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.post("accountCreation-endpoint", this::accountCreationHandler);
-        app.get("login-endpoint", this::loginHandler);
-        app.post("createMessage-endpoint", this::createMessageHandler);
-        app.get("getMessage-endpoint", this::getMessageHandler);
-        app.get("deleteMessage-endpoint", this::deleteMessageHandler);
-        app.post("updateMessage-endpoint", this::updateMessageHandler);
-        app.get("getAllMessages-endpoint", this::getAllMessagesHandler);
+        app.post("/register", this::accountCreationHandler);
+        app.get("/login", this::loginHandler);
+        app.post("/messages", this::createMessageHandler);
+        app.get("/messages", this::getMessageHandler);
+        app.delete("/messages", this::deleteMessageHandler);
+        app.patch("/messages", this::updateMessageHandler);
+        app.get("/account", this::getAllMessagesHandler);
         return app;
     }
 
