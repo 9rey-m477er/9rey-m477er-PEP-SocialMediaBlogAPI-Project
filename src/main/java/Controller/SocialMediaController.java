@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Model.Account;
+import Model.Message;
 import Service.accountService;
+import Service.messageService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -22,10 +24,20 @@ public class SocialMediaController {
 
     accountService acServ;
     messageService meServ;
+
+    public SocialMediaController(){
+        this.acServ = new accountService();
+        this.meServ = new messageService();
+    }
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.get("accountCreation-endpoint", this::accountCreationHandler);
-
+        app.post("accountCreation-endpoint", this::accountCreationHandler);
+        app.get("login-endpoint", this::loginHandler);
+        app.post("createMessage-endpoint", this::createMessageHandler);
+        app.get("getMessage-endpoint", this::getMessageHandler);
+        app.get("deleteMessage-endpoint", this::deleteMessageHandler);
+        app.post("updateMessage-endpoint", this::updateMessageHandler);
+        app.get("getAllMessages-endpoint", this::getAllMessagesHandler);
         return app;
     }
 
@@ -36,8 +48,6 @@ public class SocialMediaController {
     private void accountCreationHandler(Context context) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Account ac = om.readValue(context.body(), Account.class);
-        
-        //Account newAccount = accountService.addAccount(ac);
         Account newAccount = acServ.addAccount(ac);
 
         if(newAccount != null){
@@ -48,6 +58,42 @@ public class SocialMediaController {
         }
         context.json("sample text");
     }
+    private void loginHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Account ac = om.readValue(ctx.body(),Account.class);
 
+    }
+    private void createMessageHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Message mess = om.readValue(ctx.body(), Message.class);
+        Message newMess = meServ.createMessage(mess);
+        if(newMess != null){
+            ctx.json(om.writeValueAsString(newMess));
+
+        }
+        else{
+            ctx.status(400);
+        }
+    }
+    private void getMessageHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Message mess = om.readValue(ctx.body(), Message.class);
+
+    }
+    private void deleteMessageHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Message mess = om.readValue(ctx.body(), Message.class);
+
+    }
+    private void updateMessageHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Message mess = om.readValue(ctx.body(), Message.class);
+
+    }
+    private void getAllMessagesHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Message mess = om.readValue(ctx.body(), Message.class);
+
+    }
 
 }

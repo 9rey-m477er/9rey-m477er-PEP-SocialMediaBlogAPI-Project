@@ -1,10 +1,24 @@
 package Service;
 import DAO.messageDAO;
+import Model.Message;
+import Model.Account;
 
 public class messageService {
   messageDAO messageDao;
   
   public messageService(){
     messageDao = new messageDAO();
+  }
+  public Message createMessage(Message m){
+    return messageDao.createMessage(m);
+  }
+  public Message deleteMessage(Message m){
+    return messageDao.deleteMessage(m);
+  }
+  public Message updateMessage(Message m){
+    return messageDao.updateMessage(m);
+  }
+  public Message getAllMessagse(Account a){
+    return messageDao.getAllMessages(a);
   }
 }
