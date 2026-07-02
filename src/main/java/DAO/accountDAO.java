@@ -3,6 +3,9 @@ import Model.Account;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.h2.command.Prepared;
+
 import Util.ConnectionUtil;
 
 public class accountDAO {
@@ -27,5 +30,16 @@ public class accountDAO {
     }
     return null;
 
+  }
+  public void login(String username, String password){
+    Connection connection = ConnectionUtil.getConnection();
+    try{
+      String sql = "Select * FROM Account where (username,password) VALUES (?,?)";
+      PreparedStatement ps = connection.prepareStatement(sql);
+      ps.setString(1, username);
+      ps.setString(2, password);
+    }catch(Exception e){
+      System.out.println(e.getMessage());
+    }
   }
 }
