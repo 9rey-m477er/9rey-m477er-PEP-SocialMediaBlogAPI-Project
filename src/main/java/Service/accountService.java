@@ -1,7 +1,5 @@
 package Service;
-
 import java.sql.Connection;
-
 import DAO.accountDAO;
 import Model.Account;
 import Util.ConnectionUtil;
