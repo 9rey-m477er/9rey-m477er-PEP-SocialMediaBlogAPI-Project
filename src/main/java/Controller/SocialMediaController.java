@@ -69,7 +69,7 @@ public class SocialMediaController {
         Message newMess = meServ.createMessage(mess);
         if(newMess != null){
             ctx.json(om.writeValueAsString(newMess));
-
+            ctx.status(200);
         }
         else{
             ctx.status(400);
