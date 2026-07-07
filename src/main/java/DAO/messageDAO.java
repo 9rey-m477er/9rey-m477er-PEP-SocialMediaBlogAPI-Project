@@ -9,6 +9,19 @@ import Util.ConnectionUtil;
 
 public class messageDAO {
   public Message createMessage(Message m){
+    Connection connection = ConnectionUtil.getConnection();
+    try{
+      String query = "INSERT INTO message (message_text, posted_by, time_posted_epoch) VALUES (?,?,?)";
+      PreparedStatement ps = connection.prepareStatement(query);
+      ps.setString(1, m.getMessage_text());
+      ps.setInt(2, m.getPosted_by());
+      ps.setInt(3, m.getTime_posted_epoch());
+      ps.executeUpdate();
+      return m;
+    }
+    catch(SQLException e){
+      System.out.println(e.getMessage());
+    }
     return null;
   }
   public Message deleteMessage(Message m){
