@@ -71,7 +71,9 @@ public class SocialMediaController {
             ctx.json(om.writeValueAsString(newMess));
             ctx.status(200);
         }
-
+        else if(newMess.message_text.equals("")){
+            ctx.status(400);
+        }
         else{
             ctx.status(400);
         }
