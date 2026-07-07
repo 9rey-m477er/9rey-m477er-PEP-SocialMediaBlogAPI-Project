@@ -15,7 +15,7 @@ public class messageDAO {
       PreparedStatement ps = connection.prepareStatement(query);
       ps.setString(1, m.getMessage_text());
       ps.setInt(2, m.getPosted_by());
-      ps.setInt(3, m.getTime_posted_epoch());
+      ps.setLong(3, m.getTime_posted_epoch());
       ps.executeUpdate();
       return m;
     }
