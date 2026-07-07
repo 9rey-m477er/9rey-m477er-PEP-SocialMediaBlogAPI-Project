@@ -67,12 +67,12 @@ public class SocialMediaController {
         ObjectMapper om = new ObjectMapper();
         Message mess = om.readValue(ctx.body(), Message.class);
         Message newMess = meServ.createMessage(mess);
-        if(newMess != null){
+        if(newMess.getMessage_text().equals("")){
+            ctx.status(400);
+        }
+        else if(newMess != null){
             ctx.json(om.writeValueAsString(newMess));
             ctx.status(200);
-        }
-        else if(newMess.message_text.equals("")){
-            ctx.status(400);
         }
         else{
             ctx.status(400);
