@@ -72,7 +72,7 @@ public class SocialMediaController {
             ctx.status(200);
         }
         else{
-            ctx.status(200);
+            ctx.status(400);
         }
     }
     private void getMessageHandler(Context ctx) throws JsonProcessingException{
