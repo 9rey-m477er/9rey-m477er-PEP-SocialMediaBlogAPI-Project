@@ -18,6 +18,9 @@ public class accountService {
     return accountDao.login(ac.getUsername(), ac.getPassword());
   }
   public Account addAccount(Account account){
+    if(account.getUsername().equals("") || account.getPassword().length() < 4){
+      return null;
+    }
     return accountDao.addAccount(account);
   }
 }
