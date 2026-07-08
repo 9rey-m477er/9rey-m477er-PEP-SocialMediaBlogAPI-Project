@@ -89,6 +89,14 @@ public class SocialMediaController {
     private void deleteMessageHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Message mess = om.readValue(ctx.body(), Message.class);
+        Message deleted = meServ.deleteMessage(mess);
+        if(deleted != null){
+            ctx.json(om.writeValueAsString(deleted));
+            ctx.status(200);
+        }
+        else{
+            ctx.status(400);
+        }
 
     }
     private void updateMessageHandler(Context ctx) throws JsonProcessingException{
