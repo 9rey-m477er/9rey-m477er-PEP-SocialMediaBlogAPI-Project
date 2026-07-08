@@ -32,7 +32,17 @@ public class messageDAO {
   }
 
   public Message deleteMessage(Message m){
+    Connection connection = ConnectionUtil.getConnection();
+    try{
+      String query = "DELETE * FROM message where message_id = ?";
+      PreparedStatement ps = connection.prepareStatement(query);
+      ps.setInt(1, m.getMessage_id());
+      return m;
+    }catch(SQLException e){
+      System.out.println(e.getMessage());
+    }
     return null;
+    
   }
   public Message updateMessage(Message m){
     return null;
