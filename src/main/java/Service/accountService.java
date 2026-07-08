@@ -14,8 +14,8 @@ public class accountService {
 
   
   public Account login(Account ac){
-    accountDao.login(ac.getUsername(), ac.getPassword());
-    return ac;
+    
+    return accountDao.login(ac.getUsername(), ac.getPassword());
   }
   public Account addAccount(Account account){
     return accountDao.addAccount(account);
