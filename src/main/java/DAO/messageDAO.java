@@ -31,13 +31,19 @@ public class messageDAO {
     return null;
   }
 
-  public Message deleteMessage(Message m){
+  public Message deleteMessage(int id){
     Connection connection = ConnectionUtil.getConnection();
     try{
       String query = "DELETE * FROM message where message_id = ?";
       PreparedStatement ps = connection.prepareStatement(query);
-      ps.setInt(1, m.getMessage_id());
-      return m;
+      ps.setInt(1, id);
+      //ps.executeUpdate();
+      ResultSet rs = ps.executeQuery();
+      Message deleted = null;;
+      if(rs.next()){
+        deleted = new Message(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getLong(4));
+      }
+      return deleted;
     }catch(SQLException e){
       System.out.println(e.getMessage());
     }

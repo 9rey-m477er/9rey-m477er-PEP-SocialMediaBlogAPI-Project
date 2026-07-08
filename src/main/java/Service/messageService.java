@@ -20,12 +20,15 @@ public class messageService {
     }
     return messageDao.createMessage(m);
   }
-  public Message deleteMessage(Message m){
-    return messageDao.deleteMessage(m);
+
+  public Message deleteMessage(int id){
+    return messageDao.deleteMessage(id);
   }
+  
   public Message updateMessage(Message m){
     return messageDao.updateMessage(m);
   }
+
   public Message getAllMessagse(Account a){
     return messageDao.getAllMessages(a);
   }
