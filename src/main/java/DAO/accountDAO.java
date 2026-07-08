@@ -45,7 +45,7 @@ public class accountDAO {
   public Account getAccountByID(int id){
     Connection connection = ConnectionUtil.getConnection();
     try{
-      String sql = "Select * FROM Account where (ID) VALUES (?)";
+      String sql = "Select * FROM Account where (account_id) = (?)";
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
