@@ -14,9 +14,9 @@ public class messageService {
     if(m.getMessage_text() == null || m.getMessage_text().length() > 255 || m.getMessage_text().isBlank()){
       return null;
     }
-    if(accountDAO.getAccount_id(m.getPosted_by()) == null){
+    /*if(accountDAO.getAccount_id(m.getPosted_by()) == null){
       return null;
-    }
+    }*/
     return messageDao.createMessage(m);
   }
   public Message deleteMessage(Message m){
