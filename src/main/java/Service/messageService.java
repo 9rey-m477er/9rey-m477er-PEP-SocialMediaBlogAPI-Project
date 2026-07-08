@@ -10,9 +10,9 @@ public class messageService {
     messageDao = new messageDAO();
   }
   public Message createMessage(Message m){
-    if(m.getMessage_text() == null || m.getMessage_text().length() > 255 || m.getMessage_text().isBlank()){
+    /*if(m.getMessage_text() == null || m.getMessage_text().length() > 255 || m.getMessage_text().isBlank()){
       return null;
-    }
+    }*/
     return messageDao.createMessage(m);
   }
   public Message deleteMessage(Message m){
