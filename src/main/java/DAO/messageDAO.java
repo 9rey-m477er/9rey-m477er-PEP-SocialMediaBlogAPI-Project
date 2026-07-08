@@ -23,9 +23,6 @@ public class messageDAO {
       if(rs.next()){
         message_id = (int) rs.getInt(1);
       }
-      if(m.message_text.length() > 255){
-        return null;
-      }
       return new Message(message_id, m.getPosted_by(), m.getMessage_text(), m.getTime_posted_epoch());
     }
     catch(SQLException e){
