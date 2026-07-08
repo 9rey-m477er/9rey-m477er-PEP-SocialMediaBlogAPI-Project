@@ -30,17 +30,22 @@ public class accountDAO {
 
   }
 
-  public void login(String username, String password){
+  public Account login(String username, String password){
     Connection connection = ConnectionUtil.getConnection();
     try{
-      String sql = "Select * FROM Account where (username,password) VALUES (?,?)";
+      String sql = "Select * FROM Account where (username) = (?) and (password) = (?)";
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setString(1, username);
       ps.setString(2, password);
-      
+      ResultSet rs = ps.executeQuery();
+      if(rs.next()){
+        Account ac = new Account(rs.getInt("account_id"), rs.getString("username"), rs.getString("password"));
+        return ac;
+      }
     }catch(Exception e){
       System.out.println(e.getMessage());
     }
+    return null;
   }
   public Account getAccountByID(int id){
     Connection connection = ConnectionUtil.getConnection();

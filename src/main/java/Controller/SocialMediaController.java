@@ -32,7 +32,7 @@ public class SocialMediaController {
     public Javalin startAPI() {
         Javalin app = Javalin.create();
         app.post("/register", this::accountCreationHandler);
-        app.get("/login", this::loginHandler);
+        app.post("/login", this::loginHandler);
         app.post("/messages", this::createMessageHandler);
         app.get("/messages/{message_id}", this::getMessageHandler);
         app.delete("/messages", this::deleteMessageHandler);
@@ -49,28 +49,31 @@ public class SocialMediaController {
         ObjectMapper om = new ObjectMapper();
         Account ac = om.readValue(context.body(), Account.class);
         Account newAccount = acServ.addAccount(ac);
-
         if(newAccount != null){
             context.json(om.writeValueAsString(newAccount));
         }
         else{
             context.status(400);
         }
-        context.json("sample text");
     }
     private void loginHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Account ac = om.readValue(ctx.body(),Account.class);
-
+        Account loggedIn = accountService.login(ac);
+        if(loggedIn != null){
+            ctx.json(om.writeValueAsString(loggedIn))
+        }else{
+            ctx.status(400);
+        }
     }
     private void createMessageHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Message mess = om.readValue(ctx.body(), Message.class);
         Message newMess = meServ.createMessage(mess);
-        if(newMess.getMessage_text().equals("")){
+        /*if(newMess.getMessage_text().equals("")){
             ctx.status(400);
-        }
-        else if(newMess != null){
+        }*/
+        if(newMess != null){
             ctx.json(om.writeValueAsString(newMess));
             ctx.status(200);
         }
