@@ -49,7 +49,7 @@ public class accountDAO {
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
-      while(rs.next()){
+      if(rs.next()){
         Account ac = new Account(rs.getInt("account_id"), rs.getString("username"), rs.getString("password"));
         return ac;
       }
