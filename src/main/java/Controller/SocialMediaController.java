@@ -61,9 +61,9 @@ public class SocialMediaController {
         Account ac = om.readValue(ctx.body(),Account.class);
         Account loggedIn = acServ.login(ac);
         if(loggedIn != null){
-            ctx.json(om.writeValueAsString(loggedIn))
+            ctx.json(om.writeValueAsString(loggedIn));
         }else{
-            ctx.status(400);
+            ctx.status(401);
         }
     }
     private void createMessageHandler(Context ctx) throws JsonProcessingException{
