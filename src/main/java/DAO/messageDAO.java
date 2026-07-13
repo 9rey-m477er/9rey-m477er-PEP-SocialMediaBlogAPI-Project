@@ -37,13 +37,15 @@ public class messageDAO {
       String query = "DELETE * FROM message where message_id = ?";
       PreparedStatement ps = connection.prepareStatement(query);
       ps.setInt(1, id);
-      ps.executeUpdate();
+      
       ResultSet rs = ps.executeQuery();
       Message deleted = null;
       if(rs.next()){
         deleted = new Message(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getLong(4));
       }
+      ps.executeUpdate();
       return deleted;
+      
     }catch(SQLException e){
       System.out.println(e.getMessage());
     }
