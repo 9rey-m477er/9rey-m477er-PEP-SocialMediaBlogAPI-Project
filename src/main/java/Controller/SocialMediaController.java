@@ -113,6 +113,16 @@ public class SocialMediaController {
     private void updateMessageHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Message mess = om.readValue(ctx.body(), Message.class);
+        int id = Integer.parseInt(ctx.pathParam("message_id"));
+        String newMessage = ctx.pathParam("message_text");
+        Message target = meServ.updateMessage(id, newMessage);
+        if(target == null){
+            ctx.status(200);
+        }
+        else{
+            ctx.json(om.writeValueAsString(target));
+            ctx.status(200);
+        }
 
     }
     private void getAllMessagesHandler(Context ctx) throws JsonProcessingException{

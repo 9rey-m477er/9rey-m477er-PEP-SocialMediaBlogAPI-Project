@@ -34,8 +34,8 @@ public class messageService {
     
   }
   
-  public Message updateMessage(Message m){
-    return messageDao.updateMessage(m);
+  public Message updateMessage(int id, String text){
+    return messageDao.updateMessage(id, text);
   }
 
   public List<Message> getAllMessages(int id){
