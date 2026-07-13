@@ -31,10 +31,12 @@ public class messageService {
     else{
       return null;
     }
-    
   }
   
   public Message updateMessage(int id, String text){
+    if(text.length() > 255 || text.equals("") || text == null){
+      return null;
+    }
     return messageDao.updateMessage(id, text);
   }
 

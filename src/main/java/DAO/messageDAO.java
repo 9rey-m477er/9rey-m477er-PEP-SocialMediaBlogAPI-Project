@@ -44,12 +44,15 @@ public class messageDAO {
       System.out.println(e.getMessage());
     }
     return null;
-    
   }
+
   public Message updateMessage(int id, String newMessage){
     Connection connection = ConnectionUtil.getConnection();
     try{
       Message target = getMessageByID(id);
+      if(target == null){
+        return null;
+      }
       String query = "UPDATE message SET message_text = ? WHERE message_id = ?";
       PreparedStatement ps = connection.prepareStatement(query);
       ps.setString(1, newMessage);
