@@ -117,7 +117,7 @@ public class SocialMediaController {
         String newMessage = mess.getMessage_text();
         Message target = meServ.updateMessage(id, newMessage);
         if(target == null){
-            ctx.status(200);
+            ctx.status(400);
         }
         else{
             ctx.json(om.writeValueAsString(target));
