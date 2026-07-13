@@ -56,5 +56,23 @@ public class messageDAO {
   public Message getAllMessages(Account a){ //given userID
     return null;
   }
+
+  public Message getMessageByID(int id){
+    Connection connection = ConnectionUtil.getConnection();
+    try{
+      String query = "Select * FROM message where message_id = ?";
+      PreparedStatement ps = connection.prepareStatement(query);
+      ps.setInt(1, id);
+      ResultSet rs = ps.executeQuery();
+      Message targetMessage = null;
+      if(rs.next()){
+        targetMessage = new Message(rs.getInt(1), rs.getString(2), rs.getLong(3));
+      }
+      return targetMessage;
+    }catch(SQLException e){
+      System.out.println(e.getMessage());
+    }
+    return null;
+  }
   
 }

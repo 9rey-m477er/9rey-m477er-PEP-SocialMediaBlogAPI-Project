@@ -32,4 +32,7 @@ public class messageService {
   public Message getAllMessagse(Account a){
     return messageDao.getAllMessages(a);
   }
+  public Message getMessageByID(int id){
+    return messageDao.getMessageByID(id);
+  }
 }
