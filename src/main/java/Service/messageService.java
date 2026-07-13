@@ -34,7 +34,7 @@ public class messageService {
   }
   
   public Message updateMessage(int id, String text){
-    if(text.length() > 255 || text.equals("") || text == null){
+    if(text == null || text.isBlank() || text.length() > 255){
       return null;
     }
     return messageDao.updateMessage(id, text);

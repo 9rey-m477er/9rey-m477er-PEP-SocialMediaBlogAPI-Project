@@ -58,7 +58,7 @@ public class messageDAO {
       ps.setString(1, newMessage);
       ps.setInt(2, id);
       ps.executeUpdate();
-      return target;
+      return getMessageByID(id);
     }catch(SQLException e){
       System.out.println(e.getMessage());
     }
