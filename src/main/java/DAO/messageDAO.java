@@ -53,7 +53,19 @@ public class messageDAO {
   public Message updateMessage(Message m){
     return null;
   }
-  public Message getAllMessages(Account a){ //given userID
+  public List<Message> getAllMessages(int id){ //given userID
+    Connection connection = ConnectionUtil.getConnection();
+    try{
+      String query = "Select * FROM message where posted_by = ?";
+      PreparedStatement ps = connection.prepareStatement(query);
+      ps.setInt(1, id);
+      ResultSet rs = ps.executeQuery();
+      while(rs.next()){
+        Message messageEntry = new Message(rs.getInt(1), rs.getString(2), rs.getLong(3));
+      }
+    }catch(SQLException e){
+      System.out.println(e.getMessage());
+    }
     return null;
   }
 
@@ -69,6 +81,7 @@ public class messageDAO {
         targetMessage = new Message(rs.getInt(1), rs.getString(2), rs.getLong(3));
       }
       return targetMessage;
+
     }catch(SQLException e){
       System.out.println(e.getMessage());
     }
