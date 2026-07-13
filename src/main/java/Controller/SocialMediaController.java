@@ -101,11 +101,11 @@ public class SocialMediaController {
         //Message mess = om.readValue(ctx.body(), Message.class);
         int id = Integer.parseInt(ctx.pathParam("message_id"));
         Message deleted = meServ.deleteMessage(id);
-        if(deleted != null){
-            ctx.json(om.writeValueAsString(deleted));
+        if(deleted == null){
             ctx.status(200);
         }
         else{
+            ctx.json(om.writeValueAsString(deleted));
             ctx.status(200);
         }
 
