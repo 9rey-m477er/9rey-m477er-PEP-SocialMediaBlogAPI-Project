@@ -11,11 +11,11 @@ public class accountService {
   public accountService(){
     accountDao = new accountDAO();
   }
-
   
   public Account login(Account ac){
     return accountDao.login(ac.getUsername(), ac.getPassword());
   }
+
   public Account addAccount(Account account){
     if(account.getUsername().equals("") || account.getPassword().length() < 4){
       return null;
