@@ -73,9 +73,7 @@ public class SocialMediaController {
         ObjectMapper om = new ObjectMapper();
         Message mess = om.readValue(ctx.body(), Message.class);
         Message newMess = meServ.createMessage(mess);
-        /*if(newMess.getMessage_text().equals("")){
-            ctx.status(400);
-        }*/
+
         if(newMess != null){
             ctx.json(om.writeValueAsString(newMess));
             ctx.status(200);
@@ -86,7 +84,7 @@ public class SocialMediaController {
     }
     private void getMessageHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
-        //Message mess = om.readValue(ctx.body(), Message.class);
+
         int id = Integer.parseInt(ctx.pathParam("message_id"));
         Message targetMessage = meServ.getMessageByID(id);
         if(targetMessage != null){
@@ -101,7 +99,7 @@ public class SocialMediaController {
     }
     private void deleteMessageHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
-        //Message mess = om.readValue(ctx.body(), Message.class);
+
         int id = Integer.parseInt(ctx.pathParam("message_id"));
         Message deleted = meServ.deleteMessage(id);
         if(deleted == null){
