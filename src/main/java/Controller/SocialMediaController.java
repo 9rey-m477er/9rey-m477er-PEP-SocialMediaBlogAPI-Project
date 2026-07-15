@@ -131,8 +131,8 @@ public class SocialMediaController {
     private void getAllMessagesFromIDHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Account a = om.readValue(ctx.body(), Account.class);
-        List<Message> messages = meServ.getAllMessages(a.getAccount_id());
-        ctx.json(meServ.getAllMessages(a.getAccount_id()));
+        List<Message> messages = meServ.getAllMessagesFromID(a.getAccount_id());
+        ctx.json(meServ.getAllMessagesFromID(a.getAccount_id()));
 
     }
 
