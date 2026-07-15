@@ -136,7 +136,7 @@ public class SocialMediaController {
 
     }
 
-    private void getAllMessages(Context ctx) throws JsonProcessingException{
+    private void getAllMessagesHandler(Context ctx) throws JsonProcessingException{
         ctx.json(meServ.getAllMessages());
     }
 
