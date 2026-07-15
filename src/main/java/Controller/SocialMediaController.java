@@ -39,7 +39,7 @@ public class SocialMediaController {
         app.get("/messages/{message_id}", this::getMessageHandler);
         app.delete("/messages/{message_id}", this::deleteMessageHandler);
         app.patch("/messages/{message_id}", this::updateMessageHandler);
-        app.get("/accounts/{account_id}/messages", this::getAllMessagesHandler);
+        app.get("/accounts/{account_id}/messages", this::getAllMessagesFromIDHandler);
         app.get("/messages", this::getAllMessagesHandler);
         return app;
     }
@@ -128,12 +128,16 @@ public class SocialMediaController {
         }
 
     }
-    private void getAllMessagesHandler(Context ctx) throws JsonProcessingException{
+    private void getAllMessagesFromIDHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Account a = om.readValue(ctx.body(), Account.class);
         List<Message> messages = meServ.getAllMessages(a.getAccount_id());
         ctx.json(meServ.getAllMessages(a.getAccount_id()));
 
+    }
+
+    private void getAllMessages(Context ctx) throws JsonProcessingException{
+        ctx.json(meServ.getAllMessages());
     }
 
 }

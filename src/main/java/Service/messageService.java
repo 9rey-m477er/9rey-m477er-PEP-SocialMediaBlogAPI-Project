@@ -40,8 +40,12 @@ public class messageService {
     return messageDao.updateMessage(id, text);
   }
 
-  public List<Message> getAllMessages(int id){
-    return messageDao.getAllMessages(id);
+  public List<Message> getAllMessagesFromID(int id){
+    return messageDao.getAllMessagesFromID(id);
+  }
+
+  public List<Message> getAllMessages(){
+    return messageDao.getAllMessages();
   }
   public Message getMessageByID(int id){
     return messageDao.getMessageByID(id);
